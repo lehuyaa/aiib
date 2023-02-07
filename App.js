@@ -22,11 +22,11 @@ import axios from 'axios';
 const Item = ({title, onClick}) => (
   <TouchableOpacity onPress={onClick} style={styles.item}>
     <Text style={styles.titleItem}>{title} </Text>
-    <Image
+    {/* <Image
       style={styles.arrow}
       source={require('./assets/black-arrow.png')}
       resizeMode="contain"
-    />
+    /> */}
   </TouchableOpacity>
 );
 
@@ -140,6 +140,9 @@ function App() {
     setYearAIIB('');
     setFolder('');
     setFolder2('');
+    setListVideo([]);
+    setListFolder([]);
+    setListFolder2([]);
     setLoading(true);
     axios
       .get(
@@ -201,38 +204,62 @@ function App() {
             <Text style={styles.title}>GREEN INFRASTRUCTURE</Text>
           </TouchableOpacity>
           {yearAIIB && (
-            <>
+            <TouchableOpacity
+              onPress={() => {
+                setListFolder([]);
+                setListFolder2([]);
+                setListVideo([]);
+                setFolder('');
+                setFolder2('');
+                setChooseImage('');
+              }}
+              style={{flexDirection: 'row'}}>
               <Image
                 style={styles.arrow}
                 source={require('./assets/left-arrow.png')}
                 resizeMode="contain"
               />
               <Text style={styles.title}>{yearAIIB}</Text>
-            </>
+            </TouchableOpacity>
           )}
           {folder && (
-            <>
+            <TouchableOpacity
+              onPress={() => {
+                setListFolder2([]);
+                setFolder2('');
+                setListVideo([]);
+                setChooseImage('');
+              }}
+              style={{
+                flexDirection: 'row',
+                maxWidth: '20%',
+              }}>
               <Image
                 style={styles.arrow}
                 source={require('./assets/left-arrow.png')}
                 resizeMode="contain"
               />
-              <Text numberOfLines={1} style={[styles.title, {maxWidth: '20%'}]}>
+              <Text numberOfLines={1} style={[styles.title, {maxWidth: '80%'}]}>
                 {folder}
               </Text>
-            </>
+            </TouchableOpacity>
           )}
           {folder2 && (
-            <>
+            <TouchableOpacity
+              onPress={() => {
+                setListVideo([]);
+                setChooseImage('');
+              }}
+              style={{flexDirection: 'row'}}>
               <Image
                 style={styles.arrow}
                 source={require('./assets/left-arrow.png')}
                 resizeMode="contain"
               />
-              <Text numberOfLines={1} style={[styles.title, {maxWidth: '20%'}]}>
+              <Text numberOfLines={1} style={[styles.title, {maxWidth: '30%'}]}>
                 {folder2}
               </Text>
-            </>
+            </TouchableOpacity>
           )}
         </View>
         <View style={styles.body}>
@@ -256,10 +283,10 @@ function App() {
           )}
           <View
             style={{
-              width: '47.5%',
-              height: '70%',
+              width: '52%',
+              height: '85%',
               position: 'absolute',
-              top: '15%',
+              top: '7.5%',
               right: '5%',
               backgroundColor: 'white',
               borderWidth: 10,
@@ -368,6 +395,7 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontWeight: '600',
     fontSize: 16,
+    width: '70%',
   },
   mainImage: {
     width: '100%',
